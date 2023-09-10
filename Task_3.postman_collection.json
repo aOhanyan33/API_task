@@ -79,9 +79,7 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"var jsonData = JSON.parse(responseBody);\r",
-							"var token = jsonData['token'];\r",
-							"pm.environment.set(\"token\", token)"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -94,7 +92,9 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							""
+							"var jsonData = JSON.parse(responseBody);\r",
+							"var token = jsonData['token'];\r",
+							"pm.environment.set(\"token\", token)"
 						],
 						"type": "text/javascript"
 					}
@@ -120,7 +120,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"{{username}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+					"raw": "{\r\n  \"username\": \"{{random_username}}\",\r\n  \"password\": \"{{random_password}}\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -230,7 +230,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://qwallity-prod.onrender.com/user_role/{{username}}",
+					"raw": "https://qwallity-prod.onrender.com/user_role/{{random_username}}",
 					"protocol": "https",
 					"host": [
 						"qwallity-prod",
@@ -239,7 +239,7 @@
 					],
 					"path": [
 						"user_role",
-						"{{username}}"
+						"{{random_username}}"
 					]
 				}
 			},
@@ -278,6 +278,20 @@
 		},
 		{
 			"name": "Add Advanced Course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -293,7 +307,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"title\": \"new Course Anna\",\r\n  \"body\": \"string\",\r\n  \"coursetype\": \"1\",\r\n  \"author\": \"{{username}}\",\r\n  \"price\": 1000\r\n}",
+					"raw": "{\r\n  \"title\": \"Anna Advanced\",\r\n  \"body\": \"string\",\r\n  \"coursetype\": \"2\",\r\n  \"author\": \"{{random_username}}\",\r\n  \"price\": 101111\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -353,7 +367,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"title\": \"{{coursetitle}}\",\r\n  \"body\": \"string\",\r\n  \"coursetype\": \"2\",\r\n  \"author\": \"{{username}}\",\r\n  \"price\": \"{{price}}\"\r\n}",
+					"raw": "{\r\n  \"title\": \"{{coursetitle}}\",\r\n  \"body\": \"string\",\r\n  \"coursetype\": \"1\",\r\n  \"author\": \"{{random_username}}\",\r\n  \"price\": \"{{price}}\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
